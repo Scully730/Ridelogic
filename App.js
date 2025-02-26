@@ -13,6 +13,10 @@ import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps"
 import { FlatList, TextInput } from "react-native-gesture-handler";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBus } from "@fortawesome/free-solid-svg-icons";
+import  RouteList from "./components/routes/RouteList";
+import SearchScreen from "./components/screen/SearchScreen";
+import { SafeAreaView } from 'react-native';
+
 
 const Drawer = createDrawerNavigator();
 
@@ -276,6 +280,44 @@ const CustomDrawerContent = ({ navigation, setIsDrawerOpen }) => (
       <Text style={styles.menuText}>Home</Text>
     </TouchableOpacity>
     <TouchableOpacity
+      onPress={() => {
+        navigation.navigate("RoutesList");
+        setIsDrawerOpen(false); // Ensure menu button shows on Home
+      }}
+      style={styles.menuItem}
+    >
+
+      <Image
+        source={require('./assets/home.png')} 
+        style={{
+          width: 20,
+          height: 20,
+          tintColor: COLORS.black
+        }}
+      />
+
+      <Text style={styles.menuText}>Routes</Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate("Gabs");
+        setIsDrawerOpen(false); // Ensure menu button shows on Home
+      }}
+      style={styles.menuItem}
+    >
+
+      <Image
+        source={require('./assets/home.png')} 
+        style={{
+          width: 20,
+          height: 20,
+          tintColor: COLORS.black
+        }}
+      />
+
+      <Text style={styles.menuText}>Golden arrow</Text>
+    </TouchableOpacity>
+    <TouchableOpacity
       onPress={() => navigation.navigate("Tickets")}
       style={styles.menuItem}
     >
@@ -506,6 +548,8 @@ export default function App() {
         <Drawer.Screen name="Home">
           {(props) => <HomeScreen {...props} />}
         </Drawer.Screen>
+        <Drawer.Screen name="RoutesList" component={RouteList} />
+        <Drawer.Screen name="Gabs" component={SearchScreen} />
         <Drawer.Screen name="Profile" component={ProfileScreen} />
         <Drawer.Screen name="Tickets" component={TicketsScreen} />
         <Drawer.Screen name="Rewards" component={RewardsScreen} />
